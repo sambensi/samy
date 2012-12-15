@@ -6,7 +6,7 @@ class ImageModel extends CI_Model
     /**
      * Nom de la table en BDD
      */
-    private $_table = 'images';
+    private $_table = 'image';
 
     /**
      * Constructeur du modèle
