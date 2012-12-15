@@ -24,6 +24,14 @@ class Image extends CI_Controller
     }
 
     /**
+     * Log une action
+     */
+    protected function _log($action)
+    {
+        log_message('user', $action);
+    }
+
+    /**
      * Action principale : index
      */
     public function index()

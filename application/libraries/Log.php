@@ -1,19 +1,4 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
 
 /**
  * Logging Class
@@ -30,7 +15,7 @@ class CI_Log {
 	protected $_threshold	= 1;
 	protected $_date_fmt	= 'Y-m-d H:i:s';
 	protected $_enabled	= TRUE;
-	protected $_levels	= array('ERROR' => '1', 'DEBUG' => '2',  'INFO' => '3', 'ALL' => '4');
+	protected $_levels	= array('ERROR' => '1', 'DEBUG' => '2',  'INFO' => '3', 'ALL' => '4', 'USER' => '5');
 
 	/**
 	 * Constructor
@@ -82,6 +67,15 @@ class CI_Log {
 		{
 			return FALSE;
 		}
+
+        if ($level == 'USER') {
+
+            $CI =& get_instance();
+            $CI->load->model('logger');
+            $CI->logger->append($msg);
+
+            return TRUE;
+        }
 
 		$filepath = $this->_log_path.'log-'.date('Y-m-d').'.php';
 		$message  = '';
