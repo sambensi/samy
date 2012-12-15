@@ -20,7 +20,7 @@ class Image extends CI_Controller
     {
         $data['title'] = "List";
         $data['results'] = $this->imageModel->getAll();
-        $this->load->view('images/index.php', $data);
+        $this->load->view('images/index.phtml', $data);
     }
 
     /**
@@ -30,7 +30,7 @@ class Image extends CI_Controller
     {
         $data['title'] = "Show";
         $data['results'] = $this->imageModel->get($id);
-        $this->load->view('images/index.php', $data);
+        $this->load->view('images/index.phtml', $data);
     }
 
     /**
@@ -40,7 +40,7 @@ class Image extends CI_Controller
     {
         $data['title'] = "Destroy";
         $data['results'] = $this->imageModel->delete($id);
-        $this->load->view('images/index.php', $data);
+        $this->load->view('images/index.phtml', $data);
     }
 
     /**
@@ -50,7 +50,7 @@ class Image extends CI_Controller
     {
         $data['title'] = "Search";
         $data['results'] = $this->imageModel->query($q, $order);
-        $this->load->view('images/index.php', $data);
+        $this->load->view('images/index.phtml', $data);
     }
 
 }
