@@ -14,13 +14,23 @@ class Image extends CI_Controller
     }
 
     /**
+     * Affichage d'une page complète
+     */
+    protected function _render($view, $data)
+    {
+        $this->load->view('layout.phtml', array_merge($data, array(
+            'content' => $this->load->view('images/' . $view . '.phtml', $data, true)
+        )));
+    }
+
+    /**
      * Action principale : index
      */
     public function index()
     {
         $data['title'] = "List";
         $data['results'] = $this->imageModel->getAll();
-        $this->load->view('images/index.phtml', $data);
+        $this->_render('index', $data);
     }
 
     /**
@@ -30,7 +40,7 @@ class Image extends CI_Controller
     {
         $data['title'] = "Show";
         $data['results'] = $this->imageModel->get($id);
-        $this->load->view('images/index.phtml', $data);
+        $this->_render('index', $data);
     }
 
     /**
@@ -40,7 +50,7 @@ class Image extends CI_Controller
     {
         $data['title'] = "Destroy";
         $data['results'] = $this->imageModel->delete($id);
-        $this->load->view('images/index.phtml', $data);
+        $this->_render('index', $data);
     }
 
     /**
@@ -50,7 +60,7 @@ class Image extends CI_Controller
     {
         $data['title'] = "Search";
         $data['results'] = $this->imageModel->query($q, $order);
-        $this->load->view('images/index.phtml', $data);
+        $this->_render('index', $data);
     }
 
 }
