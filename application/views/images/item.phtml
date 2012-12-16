@@ -1,0 +1,4 @@
+<img data-id="<?php echo $image->id; ?>" src="<?php echo base_url('images/' . $image->path . '.jpg'); ?>" alt="Image <?php echo $image->path; ?>" />
+<a href="<?php echo base_url('image/show/' . $image->id); ?>" class="view">Voir</a>
+- <a href="<?php echo base_url('image/destroy/' . $image->id); ?>">Supprimer</a>
+- <a href="<?php echo base_url('image/edit/' . $image->id); ?>" class="edit">Modifier</a>
