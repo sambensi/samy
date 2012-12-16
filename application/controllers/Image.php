@@ -41,9 +41,15 @@ class Image extends CI_Controller
         $data = array();
         $data['title'] = "List";
 
+        // Tri
+        $sortby = $this->input->get('sortby');
+        if (!in_array($sortby, array('id', 'path', 'comment'))) {
+            $sortby = 'id';
+        }
+
         if ($page == "all") {
             // On affiche toutes les images
-            $data['results'] = $this->imageModel->getAll();
+            $data['results'] = $this->imageModel->getAll($sortby);
 
             // Log
             $this->_log("Affichage de toutes les images.", $page);
@@ -59,7 +65,8 @@ class Image extends CI_Controller
                 'total_rows' => $this->imageModel->countRows(),
                 'per_page' => $per_page = 20,
                 'cur_page' => $page,
-                'use_page_numbers' => true
+                'use_page_numbers' => true,
+                'suffix' => ($sortby != 'id' ? '?sortby=' . $sortby : '')
             ));
 
             $data['results'] = $this->imageModel->getOffset($per_page * ($page - 1), $per_page);

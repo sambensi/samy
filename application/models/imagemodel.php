@@ -20,21 +20,24 @@ class ImageModel extends CI_Model
     /**
      * Récupère toutes les images
      */
-    public function getAll()
+    public function getAll($sortby = 'id', $dir = 'asc')
     {
-        $query = $this->db->get($this->_table);
+        $query = $this->db
+            ->order_by($sortby, $dir)
+            ->get($this->_table);
         return $query->result();
     }
 
     /**
      * Retourne un offset
      */
-    public function getOffset($offset, $count)
+    public function getOffset($offset, $count, $sortby = 'id', $dir = 'asc')
     {
         $this->db
             ->from($this->_table)
             ->limit($count)
-            ->offset($offset);
+            ->offset($offset)
+            ->order_by($sortby, $dir);
 
         return $this->db->get()->result();
     }

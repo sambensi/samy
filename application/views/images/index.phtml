@@ -1,4 +1,3 @@
-
 <h1><?php echo $title; ?></h1>
 
 <?php if (false !== $imageDestroy = $this->session->flashdata('image_destroy')): ?>
@@ -11,6 +10,12 @@
 
 <ul>
     <li><a href="<?php echo base_url('image/add'); ?>">Ajouter une nouvelle image</a></li>
+</ul>
+
+<ul>
+    <li class="sort"><a href="<?php echo current_url(); ?>?sortby=id">Trier par ID</a></li>
+    <li class="sort"><a href="<?php echo current_url(); ?>?sortby=path">Trier par path</a></li>
+    <li class="sort"><a href="<?php echo current_url(); ?>?sortby=comment">Trier par commentaire</a></li>
 </ul>
 
 <ul>
