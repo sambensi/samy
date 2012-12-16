@@ -15,7 +15,7 @@ class Logger extends CI_Model
     {
         $sessionId = $this->session->userdata('session_id');
         $date = date('Y/m/d H:i:s');
-        $this->db->query("INSERT INTO log (session_id, action, created_at) VALUES (?, ?, ?)", array(
+        $this->db->query("INSERT INTO ".$this->_table." (session_id, action, created_at) VALUES (?, ?, ?)", array(
             'session' => $sessionId,
             'action' => $action,
             'created_at' => $date
