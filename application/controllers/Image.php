@@ -36,6 +36,7 @@ class Image extends CI_Controller
      */
     public function index()
     {
+        $data = array();
         $data['title'] = "List";
         $data['results'] = $this->imageModel->getAll();
         $this->_render('index', $data);
@@ -46,6 +47,7 @@ class Image extends CI_Controller
      */
     public function show($id)
     {
+        $data = array();
         $data['title'] = "Show";
         $data['results'] = $this->imageModel->get($id);
         $this->_render('index', $data);
@@ -56,6 +58,7 @@ class Image extends CI_Controller
      */
     public function destroy($id)
     {
+        $data = array();
         $data['title'] = "Destroy";
         $data['results'] = $this->imageModel->delete($id);
         $this->_render('index', $data);
@@ -66,6 +69,7 @@ class Image extends CI_Controller
      */
     public function search($q,$order=NULL)
     {
+        $data = array();
         $data['title'] = "Search";
         $data['results'] = $this->imageModel->query($q, $order);
         $this->_render('index', $data);
