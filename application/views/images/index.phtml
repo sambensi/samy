@@ -3,7 +3,11 @@
 
 <ul>
     <?php foreach ($results as $image): ?>
-    <li><img src="<?php echo base_url('images/' . $image->path . '.jpg'); ?>" alt="Image <?php echo $image->path; ?>" /></li>
+    <li><img data-id="<?php echo $image->id; ?>" src="<?php echo base_url('images/' . $image->path . '.jpg'); ?>" alt="Image <?php echo $image->path; ?>" /></li>
     <?php endforeach; ?>
 </ul>
+
+<p>
+    <?php echo $links; ?>
+</p>
 

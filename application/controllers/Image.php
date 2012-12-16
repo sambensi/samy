@@ -34,11 +34,22 @@ class Image extends CI_Controller
     /**
      * Action principale : index
      */
-    public function index()
+    public function index($page = 1)
     {
         $data = array();
         $data['title'] = "List";
-        $data['results'] = $this->imageModel->getAll();
+
+        $this->load->library('pagination', array(
+            'base_url' => $this->config->base_url('image/index'),
+            'total_rows' => $this->imageModel->countRows(),
+            'per_page' => $per_page = 20,
+            'cur_page' => (int) $page,
+            'use_page_numbers' => true
+        ));
+
+        $data['results'] = $this->imageModel->getOffset($per_page * ($page - 1), $per_page);
+        $data['links'] = $this->pagination->create_links();
+
         $this->_render('index', $data);
     }
 
