@@ -79,4 +79,15 @@ class ImageModel extends CI_Model
         $this->db->delete($this->_table, array('id' => $id));
     }
 
+    /**
+     * Ajout d'une image
+     */
+    public function insert($path, $comment)
+    {
+        $this->db->query("INSERT INTO ".$this->_table." (path, comment) VALUES(?, ?)", array(
+            $path,
+            $comment
+        ));
+    }
+
 }

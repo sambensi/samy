@@ -16,7 +16,7 @@ class Image extends CI_Controller
     /**
      * Affichage d'une page complète
      */
-    protected function _render($view, $data)
+    protected function _render($view, $data = array())
     {
         $this->load->view('layout.phtml', array_merge($data, array(
             'content' => $this->load->view('images/' . $view . '.phtml', $data, true)
@@ -107,5 +107,55 @@ class Image extends CI_Controller
         $data['results'] = $this->imageModel->query($q, $order);
         $this->_render('index', $data);
     }
+
+    /**
+     * Ajout d'une image : formulaire
+     */
+    public function add()
+    {
+        $this->_log("Formulaire d'ajout d'une image.");
+        $this->_render('add', array('title' => 'Ajouter une image'));
+    }
+
+    /**
+     * Ajout d'une image : validation du formulaire
+     */
+    public function addPost()
+    {
+        // Upload de l'image
+        $config = array(
+            'upload_path' => './images/',
+            'allowed_types' => 'jpg',
+            'max_size' => '100',
+            'max_width' => '400',
+            'max_height' => '300'
+        );
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload()) {
+            // L'upload n'a pas fonctionné
+            $this->_log("Ajout d'une image en échec.");
+            $this->session->set_flashdata('error', $this->upload->display_errors('',''));
+        } else {
+            // L'upload a fonctionné
+            $data = $this->upload->data();
+
+            // On ajoute même s'il n'y a pas de commentaire
+            $comment = $this->input->post('comment');
+            if (!$comment) {
+                $comment = "";
+            }
+
+            // Ajout de l'image
+            $this->imageModel->insert($data['raw_name'], $comment);
+
+            // Message OK
+            $this->session->set_flashdata('success', true);
+            $this->_log("Ajout d'une image réussie : %s.jpg", $data['raw_name']);
+        }
+
+        redirect('image/add');
+    }
+
 
 }

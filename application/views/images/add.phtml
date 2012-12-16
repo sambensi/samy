@@ -1,0 +1,25 @@
+<h1>Ajouter une image</h1>
+
+<?php if ($error = $this->session->flashdata('error')): ?>
+<p class="error"><?php echo $error; ?></p>
+<?php elseif ($this->session->flashdata('success')): ?>
+<p class="success">Image ajoutée avec succès.</p>
+<?php endif; ?>
+
+<form id="add" action="<?php echo base_url('image/addPost'); ?>" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <p>
+            <label for="userfile">Image (*.jpg uniquement) :</label>
+            <input type="file" name="userfile" id="userfile" />
+        </p>
+
+        <p>
+            <label for="">Commentaire :</label>
+            <input type="text" name="comment" id="comment" />
+        </p>
+
+        <p>
+            <input type="submit" value="Ajouter l'image" />
+        </p>
+    </fieldset>
+</form>
