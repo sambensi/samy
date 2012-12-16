@@ -41,19 +41,33 @@ class Image extends CI_Controller
         $data = array();
         $data['title'] = "List";
 
-        $this->load->library('pagination', array(
-            'base_url' => $this->config->base_url('image/index'),
-            'total_rows' => $this->imageModel->countRows(),
-            'per_page' => $per_page = 20,
-            'cur_page' => (int) $page,
-            'use_page_numbers' => true
-        ));
+        if ($page == "all") {
+            // On affiche toutes les images
+            $data['results'] = $this->imageModel->getAll();
 
-        $data['results'] = $this->imageModel->getOffset($per_page * ($page - 1), $per_page);
-        $data['links'] = $this->pagination->create_links();
+            // Log
+            $this->_log("Affichage de toutes les images.", $page);
+        } else {
+            // On affiche une page
+            $page = abs((int) $page);
+            if ($page < 1) {
+                $page = 1;
+            }
 
-        // Log
-        $this->_log("Affichage de la page %d.", $page);
+            $this->load->library('pagination', array(
+                'base_url' => $this->config->base_url('image/index'),
+                'total_rows' => $this->imageModel->countRows(),
+                'per_page' => $per_page = 20,
+                'cur_page' => $page,
+                'use_page_numbers' => true
+            ));
+
+            $data['results'] = $this->imageModel->getOffset($per_page * ($page - 1), $per_page);
+            $data['links'] = $this->pagination->create_links();
+
+            // Log
+            $this->_log("Affichage de la page %d.", $page);
+        }
 
         $this->_render('index', $data);
     }
