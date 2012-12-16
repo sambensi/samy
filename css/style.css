@@ -34,7 +34,9 @@ li{
 }
 
 img{
-	margin: 70px;
+	margin: 50px;
+	height: 150px;
+	width: 150px;
 }
 ul{
 	overflow: hidden;
