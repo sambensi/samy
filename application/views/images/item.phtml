@@ -6,10 +6,17 @@ $image_properties = array(
     'title' => "Image : " . $image->path,
     'rel' => "Commentaire : " . $image->comment,
     'width' => '150',
-    'data-id' => $image->id
+    'data-id' => $image->id,
+    'style' => 'background : white;',
+    'onClick' => "changeCol()"
 );
 ?>
-<?php echo img($image_properties); ?>
-<p><a href="<?php echo base_url('image/show/' . $image->id); ?>" class="view">Show</a>
-- <a href="<?php echo base_url('image/destroy/' . $image->id); ?>">Del</a>
-- <a href="<?php echo base_url('image/edit/' . $image->id); ?>" class="edit">Edit</a></p>
+
+
+<div class="test">
+	<?php echo img($image_properties); ?>
+	<br />
+	<a href="<?php echo base_url('image/show/' . $image->id); ?>" class="view">Show</a>
+	- <a href="<?php echo base_url('image/destroy/' . $image->id); ?>">Del</a>
+	- <a href="<?php echo base_url('image/edit/' . $image->id); ?>" class="edit">Edit</a>
+</div>
