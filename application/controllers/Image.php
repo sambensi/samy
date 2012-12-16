@@ -71,10 +71,24 @@ class Image extends CI_Controller
      */
     public function destroy($id)
     {
-        $data = array();
-        $data['title'] = "Destroy";
-        $data['results'] = $this->imageModel->delete($id);
-        $this->_render('index', $data);
+        $id = (int) $id;
+
+        // On vérifie que l'image existe bien
+        $image = $this->imageModel->get($id);
+
+        if ($image !== false) {
+            // On la supprime
+            $this->imageModel->delete((int) $id);
+
+            // Message OK
+            $this->session->set_flashdata("image_destroy", "success");
+        } else {
+            // Message NOK
+            $this->session->set_flashdata("image_destroy", "failure");
+        }
+
+        // Redirection sur l'index
+        redirect('image/index');
     }
 
     /**

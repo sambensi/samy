@@ -1,9 +1,19 @@
 
 <h1><?php echo $title; ?></h1>
 
+<?php if (false !== $imageDestroy = $this->session->flashdata('image_destroy')): ?>
+    <?php if ($imageDestroy === "success"): ?>
+    <p class="success">L'image a bien été supprimée.</p>
+    <?php else: ?>
+    <p class="failure">Impossible de supprimer cette image.</p>
+    <?php endif; ?>
+<?php endif; ?>
+
 <ul>
     <?php foreach ($results as $image): ?>
-    <li><img data-id="<?php echo $image->id; ?>" src="<?php echo base_url('images/' . $image->path . '.jpg'); ?>" alt="Image <?php echo $image->path; ?>" /></li>
+    <li><img data-id="<?php echo $image->id; ?>" src="<?php echo base_url('images/' . $image->path . '.jpg'); ?>" alt="Image <?php echo $image->path; ?>" />
+    <a href="<?php echo base_url('image/destroy/' . $image->id); ?>">Supprimer</a>
+</li>
     <?php endforeach; ?>
 </ul>
 
