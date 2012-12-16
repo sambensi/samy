@@ -27,6 +27,25 @@ class ImageModel extends CI_Model
     }
 
     /**
+     * Retourne un offset
+     */
+    public function getOffset($offset, $count)
+    {
+        $this->db
+            ->from($this->_table)
+            ->limit($count, $offset);
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Retourne le nombre total d'entrées
+     */
+    public function countRows()
+    {
+        return $this->db->count_all($this->_table);
+    }
+
+    /**
      * Recherche
      */
     public function query($q, $order)
