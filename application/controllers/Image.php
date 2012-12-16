@@ -52,6 +52,9 @@ class Image extends CI_Controller
         $data['results'] = $this->imageModel->getOffset($per_page * ($page - 1), $per_page);
         $data['links'] = $this->pagination->create_links();
 
+        // Log
+        $this->_log("Affichage de la page %d.", $page);
+
         $this->_render('index', $data);
     }
 
@@ -79,6 +82,9 @@ class Image extends CI_Controller
         if ($image !== false) {
             // On la supprime
             $this->imageModel->delete((int) $id);
+
+            // Log
+            $this->_log("Suppression de l'image %d.", $id);
 
             // Message OK
             $this->session->set_flashdata("image_destroy", "success");
