@@ -132,12 +132,14 @@ class Image extends CI_Controller
     /**
      * Recherche
      */
-    public function search($q,$order=NULL)
+    public function search()
     {
+        $q = $this->input->get('q');
         $data = array();
         $data['title'] = "Search";
-        $data['results'] = $this->imageModel->query($q, $order);
-        $this->_render('index', $data);
+        $data['results'] = $this->imageModel->search($q);
+        $data['search'] = $q;
+        $this->_render('search', $data);
     }
 
     /**

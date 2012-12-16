@@ -12,6 +12,8 @@
     <p class="failure"><?php echo $error; ?></p>
 <?php endif; ?>
 
+<?php $this->load->view('images/search_form.phtml', array('search' => '')); ?>
+
 <ul>
     <li><a href="<?php echo base_url('image/add'); ?>">Ajouter une nouvelle image</a></li>
 </ul>

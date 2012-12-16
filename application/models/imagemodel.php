@@ -53,13 +53,13 @@ class ImageModel extends CI_Model
     /**
      * Recherche
      */
-    public function query($q, $order)
+    public function search($q, $order = null, $dir = 'asc')
     {
         $this->db->like('comment', $q);
         $this->db->or_like('path', $q);
         $this->db->from($this->_table);
         if ($order) {
-            $this->db->order_by($order);
+            $this->db->order_by($order, $dir);
         }
         $query = $this->db->get();
         return $query->result();

@@ -1,0 +1,15 @@
+<h1><?php echo $title; ?></h1>
+
+<?php $this->load->view('images/search_form.phtml', array('search' => $search)); ?>
+
+<ul>
+    <li><a href="<?php echo base_url('image'); ?>">Retour</a></li>
+</ul>
+
+<ul>
+    <?php foreach ($results as $image): ?>
+    <li>
+        <?php $this->load->view('images/item.phtml', array('image' => $image)); ?>
+    </li>
+    <?php endforeach; ?>
+</ul>
