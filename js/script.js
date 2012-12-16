@@ -1,17 +1,12 @@
-window.addEvent('domready', function(){
-				
-	$('ajax-req').addEvent('click', function(event){
-		event.stop();
-		
-		var req = new Request({
-			method: 'post',
-			url: 'image/comment/',
-			onRequest: function() {alert('Requête envoyé, merci de patienter...');},
-			onSuccess: function() {alert('Le commentaire a bien été changé!!!');}
-			onFailure: function() {alert('Le commentaire n\'a pas été changé!!!');}
-		});
-		
-		req.send('id=')
-	});
+window.addEvent('domready', function() {
+
+    // Affichage de la tooltip sur les images
+    var SimpleTip = new Tips($$('.simple_tip'), {
+        showDelay: 0,
+        hideDelay: 0,
+        offsets: {x: 4, y: 4},
+        fixed: false
+    });
 
 });
+
