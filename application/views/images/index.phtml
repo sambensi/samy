@@ -24,6 +24,10 @@
     <li class="sort"><a href="<?php echo current_url(); ?>?sortby=comment">Trier par commentaire</a></li>
 </ul>
 
+<?php if (isset($pagination)): ?>
+<p>Page <?php echo $pagination->cur_page; ?> / <?php echo $total_pages; ?></p>
+<?php endif; ?>
+
 <ul>
     <?php foreach ($results as $image): ?>
     <li>

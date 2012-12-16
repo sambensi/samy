@@ -62,7 +62,7 @@ class Image extends CI_Controller
 
             $this->load->library('pagination', array(
                 'base_url' => $this->config->base_url('image/index'),
-                'total_rows' => $this->imageModel->countRows(),
+                'total_rows' => $total = $this->imageModel->countRows(),
                 'per_page' => $per_page = 20,
                 'cur_page' => $page,
                 'use_page_numbers' => true,
@@ -71,6 +71,8 @@ class Image extends CI_Controller
 
             $data['results'] = $this->imageModel->getOffset($per_page * ($page - 1), $per_page);
             $data['links'] = $this->pagination->create_links();
+            $data['pagination'] = $this->pagination;
+            $data['total_pages'] = ceil($total / $per_page);
 
             // Log
             $this->_log("Affichage de la page %d.", $page);
