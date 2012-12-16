@@ -26,9 +26,11 @@ class Image extends CI_Controller
     /**
      * Log une action
      */
-    protected function _log($action)
+    protected function _log()
     {
-        log_message('user', $action);
+        $args = func_get_args();
+        $action = array_shift($args);
+        log_message('user', vsprintf($action, $args));
     }
 
     /**
