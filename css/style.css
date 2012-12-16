@@ -1,3 +1,30 @@
-body {
-    background: #fee;
+.tip-top {
+    color: #fff;
+    width: 139px;
+    z-index: 13000;
+}
+.tip-title {
+    width: 123px;
+    font-weight: bold;
+    font-size: 11px;
+    margin: 0;
+    color: #9FD4FF;
+    padding: 8px 8px 4px;
+    background: url(bubble.png) top left;
+}
+.tip-text {
+    width: 123px;
+    font-size: 11px;
+    padding: 4px 8px 8px;
+    background: url(bubble.png) bottom right;
+    color:#fff;
+}
+.tip-text A {
+    color:#069;
+}
+.tip-loading {
+    background: url(ajax_load.gif) center center no-repeat;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
 }
