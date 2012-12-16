@@ -1,0 +1,9 @@
+<h1><?php echo $title; ?></h1>
+
+<h2><?php echo htmlspecialchars($image->comment); ?></h2>
+
+<ul>
+<li><a href="<?php echo base_url('image'); ?>" class="back">Retour</a></li>
+</ul>
+
+<img src="<?php echo base_url('images/' . $image->path . '.jpg'); ?>" alt="Image #<?php echo $image->id; ?>" />

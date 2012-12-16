@@ -84,10 +84,21 @@ class Image extends CI_Controller
      */
     public function show($id)
     {
+        $id = (int) $id;
+
+        // Vérification de l'existence de l'image
+        $image = $this->imageModel->get($id);
+
+        if ($image === false) {
+            $this->session->set_flashdata('error', "Cette image n'existe pas");
+            redirect('image');
+            return;
+        }
+
         $data = array();
-        $data['title'] = "Show";
-        $data['results'] = $this->imageModel->get($id);
-        $this->_render('index', $data);
+        $data['title'] = sprintf("Image #%d", $id);
+        $data['image'] = $image;
+        $this->_render('view', $data);
     }
 
     /**
@@ -190,7 +201,7 @@ class Image extends CI_Controller
 
         // Elle n'existe pas alors message d'erreur
         if ($image === false) {
-            $this->session->set_flashdata('error_edit', "Cette image n'existe pas");
+            $this->session->set_flashdata('error', "Cette image n'existe pas");
             redirect('image');
             return;
         }
@@ -214,7 +225,7 @@ class Image extends CI_Controller
 
         // Elle n'existe pas alors message d'erreur
         if ($image === false) {
-            $this->session->set_flashdata('error_edit', "Cette image n'existe pas");
+            $this->session->set_flashdata('error', "Cette image n'existe pas");
             redirect('image');
             return;
         }
