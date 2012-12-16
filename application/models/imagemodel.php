@@ -33,7 +33,9 @@ class ImageModel extends CI_Model
     {
         $this->db
             ->from($this->_table)
-            ->limit($count, $offset);
+            ->limit($count)
+            ->offset($offset);
+
         return $this->db->get()->result();
     }
 
