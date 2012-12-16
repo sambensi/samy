@@ -68,7 +68,7 @@ class ImageModel extends CI_Model
     public function get($id)
     {
         $query = $this->db->get_where($this->_table, array('id' => $id));
-        return $query->result();
+        return current($query->result());
     }
 
     /**
