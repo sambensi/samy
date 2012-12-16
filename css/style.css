@@ -28,3 +28,16 @@
     height: 30px;
     margin: 0 auto;
 }
+
+li{
+	float : left;
+}
+
+img{
+	margin: 70px;
+}
+ul{
+	overflow: hidden;
+}
+
+

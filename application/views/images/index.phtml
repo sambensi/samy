@@ -29,10 +29,16 @@
 <?php endif; ?>
 
 <ul>
+	<?php $i = 0; ?>
     <?php foreach ($results as $image): ?>
     <li>
         <?php $this->load->view('images/item.phtml', array('image' => $image)); ?>
+		 
     </li>
+	 <?php if (++$i % 5 == 0): ?>
+	 </ul>
+	 <ul>
+	 <?php endif; ?>
     <?php endforeach; ?>
 </ul>
 

@@ -10,6 +10,6 @@ $image_properties = array(
 );
 ?>
 <?php echo img($image_properties); ?>
-<a href="<?php echo base_url('image/show/' . $image->id); ?>" class="view">Voir</a>
+<p><a href="<?php echo base_url('image/show/' . $image->id); ?>" class="view">Voir</a>
 - <a href="<?php echo base_url('image/destroy/' . $image->id); ?>">Supprimer</a>
-- <a href="<?php echo base_url('image/edit/' . $image->id); ?>" class="edit">Modifier</a>
+- <a href="<?php echo base_url('image/edit/' . $image->id); ?>" class="edit">Modifier</a></p>
