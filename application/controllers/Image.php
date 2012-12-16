@@ -178,5 +178,58 @@ class Image extends CI_Controller
         redirect('image/add');
     }
 
+    /**
+     * Edition d'une image
+     */
+    public function edit($id)
+    {
+        $id = (int) $id;
+
+        // On check que l'image existe
+        $image = $this->imageModel->get($id);
+
+        // Elle n'existe pas alors message d'erreur
+        if ($image === false) {
+            $this->session->set_flashdata('error_edit', "Cette image n'existe pas");
+            redirect('image');
+            return;
+        }
+
+        $data['title'] = sprintf("Editer l'image numéro %d", $image->id);
+        $data['image'] = $image;
+
+        $this->_log("Formulaire d'édition de l'image %d.", $image->id);
+        $this->_render('edit', $data);
+    }
+
+    /**
+     * Edition d'une image : validation du formulaire
+     */
+    public function editPost($id)
+    {
+        $id = (int) $id;
+
+        // On check que l'image existe
+        $image = $this->imageModel->get($id);
+
+        // Elle n'existe pas alors message d'erreur
+        if ($image === false) {
+            $this->session->set_flashdata('error_edit', "Cette image n'existe pas");
+            redirect('image');
+            return;
+        }
+
+        // Edition
+        $comment = $this->input->post('comment');
+        if (!$comment) {
+            $comment = "";
+        }
+
+        $this->_log("Édition de l'image %d.", $image->id);
+        $this->imageModel->editComment($id, $comment);
+
+        $this->session->set_flashdata('success', true);
+        redirect('image/edit/' . $id);
+    }
 
 }

@@ -93,4 +93,15 @@ class ImageModel extends CI_Model
         ));
     }
 
+    /**
+     * Mise à jour du commentaire d'une image
+     */
+    public function editComment($id, $comment)
+    {
+        $this->db->query("UPDATE " . $this->_table . " SET comment = ? WHERE id = ?", array(
+            $comment,
+            $id
+        ));
+    }
+
 }

@@ -1,0 +1,24 @@
+<h1><?php echo $title; ?></h1>
+
+<ul>
+<li><a href="<?php echo base_url('image'); ?>">Retour</a></li>
+</ul>
+
+<?php if ($this->session->flashdata('error')): ?>
+<p class="error">Une erreur est survenue lors de l'édition de cette image.</p>
+<?php elseif ($this->session->flashdata('success')): ?>
+<p class="success">Image éditée avec succès.</p>
+<?php endif; ?>
+
+<form id="edit" action="<?php echo base_url('image/editPost/' . $image->id); ?>" method="post">
+    <fieldset>
+        <p>
+            <label for="">Commentaire :</label>
+            <input type="text" name="comment" id="comment" value="<?php echo htmlspecialchars($image->comment); ?>" />
+        </p>
+
+        <p>
+            <input type="submit" value="Modifier l'image" />
+        </p>
+    </fieldset>
+</form>
