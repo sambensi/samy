@@ -38,25 +38,65 @@ li{
 	height: 150px;
 	width: 150px;
 	position: relative;
-	-webkit-box-shadow: 20px 20px 20px #777;
+	-webkit-box-shadow: 3px 3px 7px #080A0C;
 	
 }
 
 .test {
 	margin:0 20px 7px 0;
-	background-color: #EEE;
+	background-color: #4E5E6A;
 	font-size: 11px;
 	text-align: center;
 	float: left;   
+	border-top : 1px solid #000000;
+	border-bottom : 1px solid #000000 ;
+	border-left : 1px solid #000000 ;
 }
 
 .blockImgLink {
 	text-align: center;
 }
 
-
 ul{
 	overflow: hidden;
 }
+
+
+/***************************************/
+html {
+	background: #4E5E6A;
+}
+
+body {
+    margin: 20px 5%; /* Espacement */
+    background: #4E5E6A; 
+    padding: 20px;
+    border-radius: 15px;
+    border: 5px inset #3775A4; /* Caracteristiques de la bordure: epaisseur, forme, couleur */
+    -moz-border-radius: 50px; /* Courbures de la bordure */
+   -o-border-radius: 10px;
+}
+
+img:hover 
+{ 
+        height: 300px; 
+        width: 300px; 
+        margin-left: -50px; 
+}
+
+
+/*
+**************************************/
+/*div.titre {
+	text-align: center;
+	width:1600px;
+	height:100px;
+	margin: 20px;
+	background-color: CornflowerBlue;
+	text-shadow: 0.1em 0.1em 0.05em #333
+
+ }
+
+*/
 
 
