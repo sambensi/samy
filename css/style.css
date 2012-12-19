@@ -1,8 +1,14 @@
+/*
+l'ajout du  style pour l'affichage de la Tooltip sur les images
+*/
 .tip-top {
     color: #fff;
     width: 139px;
     z-index: 13000;
 }
+/*
+affichage du titre en bleu sur l'image bubble.png'
+*/
 .tip-title {
     width: 123px;
     font-weight: bold;
@@ -12,6 +18,9 @@
     padding: 8px 8px 4px;
     background: url(bubble.png) top left;
 }
+/*
+affichage du texte commentaire en blanc sur l'image bubble.png'
+*/
 .tip-text {
     width: 123px;
     font-size: 11px;
@@ -19,84 +28,65 @@
     background: url(bubble.png) bottom right;
     color:#fff;
 }
-.tip-text A {
-    color:#069;
-}
-.tip-loading {
-    background: url(ajax_load.gif) center center no-repeat;
-    width: 30px;
-    height: 30px;
-    margin: 0 auto;
-}
 
+/* on met les li en flotan left pour qu'ils puisse se déplacer*/
 li{
+	
 	float : left;
 }
-
-.test img{
-	padding: 20px;
-	height: 150px;
+/* style sur les images contenu dans la class test (div class=test)*/
+.blockImgLink img{
+	padding: 20px; /*padding de 20pixel*/
+	height: 150px; /*on redimentionne la taille*/
 	width: 150px;
-	position: relative;
-	-webkit-box-shadow: 3px 3px 7px #080A0C;
-	
+	-webkit-box-shadow: 3px 3px 7px #080A0C; /* on lui donne un effet ombré*/
+
 }
 
-.test {
-	margin:0 20px 7px 0;
-	background-color: white;
-	font-size: 11px;
-	text-align: center;
-	float: left;   
+.blockImgLink { /*la boite div quant a elle:*/
+	margin:0 20px 7px 0; /* on lui donne une marque assez epaisse 
+	pour quelle puisse contenir la couleur de l'annotation*/
+	background-color: white; /* un fond blanc de base*/
+	font-size: 11px; /* on dis que le texte qui y est affiché est de 11pixel*/
+	text-align: center; /* on affiche le texte au milieu*/
+	float: left;   /*comme pour le li on le place en floatant sur la gauche */
+	/*** Pour un effet de style on lui donne seulement trois bordure: haut gauche bas  ***/
 	border-top : 1px solid #000000;
 	border-bottom : 1px solid #000000 ;
 	border-left : 1px solid #000000 ;
+
 }
 
-.blockImgLink {
-	text-align: center;
-}
-
+/**overflow permet de gérer les dépassements de blocs l'affichage rend un meilleur rendu*/
 ul{
-	overflow: hidden;
+	overflow: hidden;	
 }
 
-
-/***************************************/
+/***couleur du fond d'écran****/
 html {
 	background: #4E5E6A;
 }
-
+/*** couelur du body de la page***/
 body {
-    margin: 20px 5%; /* Espacement */
-    background: #4E5E6A; 
-    padding: 20px;
-    border-radius: 15px;
-    border: 5px inset #3775A4; /* Caracteristiques de la bordure: epaisseur, forme, couleur */
-    -moz-border-radius: 50px; /* Courbures de la bordure */
+
+    margin: 20px 5%; /* Espacement de la page */
+    background: #4E5E6A;  /* couleur du background identique a celle du htlm*/
+    padding: 20px; /*espacement padding*/
+    border-radius: 15px; /* on arrondi les bord du cadre*/
+    border: 5px inset #3775A4;  /*forme du cardre*/
+    -moz-border-radius: 50px; 
    -o-border-radius: 10px;
 }
 
+/****Quand on passe au dessus d'une image on lui donne un nouvelle taille, cela permet un zoom**/
 img:hover 
 { 
+        position:relative;
         height: 300px; 
         width: 300px; 
-        margin-left: -50px; 
+        margin-left: -50;
+        background: no-repeat center center;
 }
 
-
-/*
-**************************************/
-/*div.titre {
-	text-align: center;
-	width:1600px;
-	height:100px;
-	margin: 20px;
-	background-color: CornflowerBlue;
-	text-shadow: 0.1em 0.1em 0.05em #333
-
- }
-
-*/
 
 

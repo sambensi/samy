@@ -1,9 +1,10 @@
+<!-- Formulaire de recherche (présent en haut de page) -->
 <form action="<?php echo base_url('image/search'); ?>" method="get">
     <fieldset>
-        <p>
+        <p><!-- Label de recherche -->
             <label for="search">Rechercher :</label>
-            <input id="search" name="q" type="text" value="<?php echo htmlspecialchars($search); ?>" />
+            <input id="search" name="q" type="text" value="<?php echo htmlspecialchars($search); ?>" /> <!-- On attend du text et on prend en compte les caractère spéciaux -->
         </p>
-        <p><input type="submit" value="Rechercher"></p>
+        <p><input type="submit" value="Rechercher"></p> <!-- On lance la recherche -->
     </fieldset>
 </form>

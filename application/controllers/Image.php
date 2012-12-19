@@ -18,9 +18,9 @@ class Image extends CI_Controller
      */
     protected function _render($view, $data = array())
     {
-        $this->load->view('layout.phtml', array_merge($data, array(
+        $this->load->view('layout.phtml', array_merge($data, array( //On charge la vue layout.phtml
             'content' => $this->load->view('images/' . $view . '.phtml', $data, true)
-        )));
+        ))); // On y aoute la vue choisie avec les datas
     }
 
     /**
@@ -28,10 +28,10 @@ class Image extends CI_Controller
      */
     protected function _log()
     {
-        $args = func_get_args();
-        $action = array_shift($args);
-        log_message('user', vsprintf($action, $args));
-    }
+        $args = func_get_args(); // Retourne les arguments d'une fonction sous la forme d'un tableau
+        $action = array_shift($args); 
+        log_message('user', vsprintf($action, $args)); //log_message('level', 'message') ici, level = 5 = user
+    } 
 
     /**
      * Action principale : index
@@ -42,16 +42,16 @@ class Image extends CI_Controller
         $data['title'] = "List";
 
         // Tri
-        $sortby = $this->input->get('sortby');
-        if (!in_array($sortby, array('id', 'path', 'comment'))) {
-            $sortby = 'id';
+        $sortby = $this->input->get('sortby'); // on récupère l'argument pour trier
+        if (!in_array($sortby, array('id', 'path', 'comment'))) { //si l'argument n'est pas dans le tableau
+            $sortby = 'id'; // il prend par défaut id
         }
 
         if ($page == "all") {
             // On affiche toutes les images
             $data['results'] = $this->imageModel->getAll($sortby);
 
-            // Log
+            // Message Log
             $this->_log("Affichage de toutes les images.", $page);
         } else {
             // On affiche une page
@@ -59,14 +59,14 @@ class Image extends CI_Controller
             if ($page < 1) {
                 $page = 1;
             }
-
+			//Creation de la pagination
             $this->load->library('pagination', array(
                 'base_url' => $this->config->base_url('image/index'),
-                'total_rows' => $total = $this->imageModel->countRows(),
-                'per_page' => $per_page = 20,
-                'cur_page' => $page,
-                'use_page_numbers' => true,
-                'suffix' => ($sortby != 'id' ? '?sortby=' . $sortby : '')
+                'total_rows' => $total = $this->imageModel->countRows(), //on compte le nombre d'entrée
+                'per_page' => $per_page = 20, // on donne le nombre d'image par page
+                'cur_page' => $page, //la page courante
+                'use_page_numbers' => true, //on utilise le nombre de page
+                'suffix' => ($sortby != 'id' ? '?sortby=' . $sortby : '') 
             ));
 
             $data['results'] = $this->imageModel->getOffset($per_page * ($page - 1), $per_page);
@@ -78,11 +78,11 @@ class Image extends CI_Controller
             $this->_log("Affichage de la page %d.", $page);
         }
 
-        $this->_render('index', $data);
+        $this->_render('index', $data); //Chargement de la page index
     }
 
     /**
-     * Affichage d'une image
+     * Affichage d'une image en fonction de son id
      */
     public function show($id)
     {
@@ -91,16 +91,16 @@ class Image extends CI_Controller
         // Vérification de l'existence de l'image
         $image = $this->imageModel->get($id);
 
-        if ($image === false) {
+        if ($image === false) { //si l'image n'existe pas
             $this->session->set_flashdata('error', "Cette image n'existe pas");
             redirect('image');
             return;
         }
-
+		//Sinon, on donne en titre Image xx, on affiche l'image
         $data = array();
         $data['title'] = sprintf("Image #%d", $id);
         $data['image'] = $image;
-        $this->_render('view', $data);
+        $this->_render('view', $data); //chargement de la vue view de l'image passée en parametre
     }
 
     /**
@@ -136,12 +136,12 @@ class Image extends CI_Controller
      */
     public function search()
     {
-        $q = $this->input->get('q');
+        $q = $this->input->get('q'); //on prend le texte
         $data = array();
-        $data['title'] = "Search";
-        $data['results'] = $this->imageModel->search($q);
-        $data['search'] = $q;
-        $this->_render('search', $data);
+        $data['title'] = "Search"; // Nouveau titre
+        $data['results'] = $this->imageModel->search($q); //On liste des résultats
+        $data['search'] = $q; 
+        $this->_render('search', $data); //Chargemen de la page Search avec les résultats
     }
 
     /**
@@ -150,7 +150,7 @@ class Image extends CI_Controller
     public function add()
     {
         $this->_log("Formulaire d'ajout d'une image.");
-        $this->_render('add', array('title' => 'Ajouter une image'));
+        $this->_render('add', array('title' => 'Ajouter une image')); //Lanchement de la page d'ajout
     }
 
     /**
@@ -159,14 +159,14 @@ class Image extends CI_Controller
     public function addPost()
     {
         // Upload de l'image
-        $config = array(
-            'upload_path' => './images/',
-            'allowed_types' => 'jpg',
-            'max_size' => '100',
-            'max_width' => '400',
-            'max_height' => '300'
+        $config = array( //ajout des paramètre
+            'upload_path' => './images/', //épertoire de base
+            'allowed_types' => 'jpg', //type de fichiers autorisé
+            'max_size' => '500', //tailles max
+            'max_width' => '800',
+            'max_height' => '900'
         );
-        $this->load->library('upload', $config);
+        $this->load->library('upload', $config); //lancement de la librairy upload
 
         if (!$this->upload->do_upload()) {
             // L'upload n'a pas fonctionné
@@ -189,7 +189,7 @@ class Image extends CI_Controller
             $this->session->set_flashdata('success', true);
             $this->_log("Ajout d'une image réussie : %s.jpg", $data['raw_name']);
         }
-
+		//on redirige
         redirect('image/add');
     }
 
@@ -212,8 +212,9 @@ class Image extends CI_Controller
 
         $data['title'] = sprintf("Editer l'image numéro %d", $image->id);
         $data['image'] = $image;
-
+		//log
         $this->_log("Formulaire d'édition de l'image %d.", $image->id);
+        //chargment de la page d'édition
         $this->_render('edit', $data);
     }
 
@@ -245,6 +246,14 @@ class Image extends CI_Controller
 
         $this->session->set_flashdata('success', true);
         redirect('image/edit/' . $id);
+    }
+    
+	//Lancement communication Java
+	public function communiq()
+    {
+        $this->imageModel->communiqJava();
+        // Redirection sur l'index
+        redirect('image/index');
     }
 
 }

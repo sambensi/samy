@@ -1,11 +1,18 @@
+<!--
+	Affichage de la page vieuw qui permet de regarder une seule image
+-->
+
+<!-- Titre de la page -->
 <div class="titre">
 	<h1>Images Recognizer Similar - Web App</h1><h2>- <?php echo $title; ?></h2>
 </div>
 
+<!-- Fonction qui permet de convertir des caractère spéciaux en html directement (utile dans le cas où la base serait chargé de caractère spéciaux (& - " - é à ..."))-->
 <h2><?php echo htmlspecialchars($image->comment); ?></h2>
 
 <ul>
-<li><a href="<?php echo base_url('image'); ?>" class="back">Retour</a></li>
+<li><a href="<?php echo base_url('image'); ?>" class="back">Retour</a></li> <!-- Création d'un bouton retour qui cible la page de base-->
 </ul>
 
 <img src="<?php echo base_url('images/' . $image->path . '.jpg'); ?>" alt="Image #<?php echo $image->id; ?>" />
+<!-- Affichage de l'image-->

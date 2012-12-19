@@ -20,7 +20,7 @@ class ImageModel extends CI_Model
     /**
      * Récupère toutes les images
      */
-    public function getAll($sortby = 'id', $dir = 'asc')
+    public function getAll($sortby = 'id', $dir = 'asc') // si sortby non renseigné, il prend par défaut id
     {
         $query = $this->db
             ->order_by($sortby, $dir)
@@ -55,14 +55,14 @@ class ImageModel extends CI_Model
      */
     public function search($q, $order = null, $dir = 'asc')
     {
-        $this->db->like('comment', $q);
-        $this->db->or_like('path', $q);
-        $this->db->from($this->_table);
-        if ($order) {
+        $this->db->like('comment', $q); //on cherche soit par comment
+        $this->db->or_like('path', $q); //soit par path
+        $this->db->from($this->_table); //dans la table
+        if ($order) { //si il y a un ordre, on tri
             $this->db->order_by($order, $dir);
         }
-        $query = $this->db->get();
-        return $query->result();
+        $query = $this->db->get(); // on récupère
+        return $query->result(); //on retourne le résultat
     }
 
     /**
@@ -103,5 +103,12 @@ class ImageModel extends CI_Model
             $id
         ));
     }
-
+	
+	public function communiqJava()
+	{
+		$command = 'java -cp emptyRanking.jar upmc.imw.bin.Empty_InteractiveLearning images > test.txt'; //Creation de la fonction pour lancer le .jar 
+		//avec le parametre et la redirection
+		system($command, $res );
+		
+	}
 }

@@ -1,14 +1,15 @@
+<!-- Page de cherche d'une image  -->
 <div class="titre">
 	<h1>Images Recognizer Similar - Web App</h1><h2>- <?php echo $title; ?></h2>
 </div>
 <?php $this->load->view('images/search_form.phtml', array('search' => $search)); ?>
-
+<!-- On charge la page  search_form.phtml avec en argument les résultats de la recherche -->
 <ul>
-    <li><a href="<?php echo base_url('image'); ?>">Retour</a></li>
+    <li><a href="<?php echo base_url('image'); ?>">Retour</a></li> <!-- Bouton retour -->
 </ul>
 
 <ul>
-    <?php foreach ($results as $image): ?>
+    <?php foreach ($results as $image): ?> <!-- Pour toute les images on lance la vue item (représentation d'une image)  -->
     <li>
         <?php $this->load->view('images/item.phtml', array('image' => $image)); ?>
     </li>

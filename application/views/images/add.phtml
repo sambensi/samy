@@ -1,25 +1,26 @@
+<!-- "Titre" de la page -->
 <h1>Ajouter une image</h1>
 
-<?php if ($error = $this->session->flashdata('error')): ?>
-<p class="error"><?php echo $error; ?></p>
+<?php if ($error = $this->session->flashdata('error')): ?> <!-- SI il y a une erreur on affiche un message  -->
+	<p class="error"><?php echo $error; ?></p>
 <?php elseif ($this->session->flashdata('success')): ?>
-<p class="success">Image ajoutée avec succès.</p>
+	<p class="success">Image ajoutée avec succès.</p><!-- S'il n'y a pas eu d'erreur on affiche un message  -->
 <?php endif; ?>
 
-<form id="add" action="<?php echo base_url('image/addPost'); ?>" method="post" enctype="multipart/form-data">
+<form id="add" action="<?php echo base_url('image/addPost'); ?>" method="post" enctype="multipart/form-data"> <!-- Formulaire pour l'ajout d'une image  -->
     <fieldset>
         <p>
             <label for="userfile">Image (*.jpg uniquement) :</label>
-            <input type="file" name="userfile" id="userfile" />
+            <input type="file" name="userfile" id="userfile" /> <!-- Formulaire pour l'ajout du path de l'image  -->
         </p>
 
         <p>
             <label for="comment">Commentaire :</label>
-            <input type="text" name="comment" id="comment" />
+            <input type="text" name="comment" id="comment" /> <!-- Formulaire pour l'ajout du commentaire  -->
         </p>
 
         <p>
-            <input type="submit" value="Ajouter l'image" />
+            <input type="submit" value="Ajouter l'image" /> <!-- Bouton envoyer  -->
         </p>
     </fieldset>
 </form>

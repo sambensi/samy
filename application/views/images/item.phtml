@@ -1,3 +1,6 @@
+<!--vue item (représentation d'une image)  -->
+
+<!-- Caractéristique d'une image qui vont s'afficher dans la balise -->
 <?php
 $image_properties = array(
     'src' => base_url('images/' . $image->path . '.jpg'),
@@ -6,16 +9,17 @@ $image_properties = array(
     'title' => "Image : " . $image->path,
     'rel' => "Commentaire : " . $image->comment,
     'width' => '150',
-    'data-id' => $image->id,
-    'style' => 'background : white;',
-    'data-couleur' => '0'
+    'data-id' => $image->id, //En html5, il existe les balise data-xxx qui permettent de créer nos propres attributs sans perturber le système
+    'data-annotation' => 'neutre' //Ici nous l'utiliseront pour sauvegarder l'annotation émise par l'utilisateur
 );
 ?>
 
+<!-- Réprésentation d'une image: toujours dans une balise div de classe test avec un id égale à celui de l'image -->
+<div class="blockImgLink" id="<?php echo $image->id; ?>">
+	<?php echo img($image_properties); ?> <!-- affichage de la balise <img> -->
 
-<div class="test" id="<?php echo $image->id; ?>">
-	<?php echo img($image_properties); ?>
-	<br />
+	<br /> <!-- Saut de ligne pour afficher à chaque fois les boutons d'actions destiné à l'image -->
+
 	<a href="<?php echo base_url('image/show/' . $image->id); ?>" class="view">Show</a>
 	- <a href="<?php echo base_url('image/destroy/' . $image->id); ?>">Del</a>
 	- <a href="<?php echo base_url('image/edit/' . $image->id); ?>" class="edit">Edit</a>

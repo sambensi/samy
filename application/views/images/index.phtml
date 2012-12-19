@@ -1,7 +1,8 @@
-<div class="titre">
+<!-- Page principale du site -->
+<div class="titre"> <!-- Titre de la page -->
 	<h1>Images Recognizer Similar - Web App</h1><h2>- <?php echo $title; ?></h2>
 </div>
-
+<!-- Comme c'est la page de redirection apres une suppression on se permet d'y insérer les messages d'erreur de suppression ou de réussite ddue à une supression -->
 <?php if (false !== $imageDestroy = $this->session->flashdata('image_destroy')): ?>
     <?php if ($imageDestroy === "success"): ?>
     <p class="success">L'image a bien été supprimée.</p>
@@ -10,46 +11,52 @@
     <?php endif; ?>
 <?php endif; ?>
 
+<!-- Insertion du flashdata qui permet d'affcher seulement un message si il est récupéré -->
 <?php if ($error = $this->session->flashdata('error')): ?>
     <p class="failure"><?php echo $error; ?></p>
 <?php endif; ?>
 
+<!-- Chargeement de la page search forme (rectangle présent en faut du site) -->
 <?php $this->load->view('images/search_form.phtml', array('search' => '')); ?>
 
-<ul>
+<ul><!-- Possibilité d'ajouter une image, lancement de la fonction d'ajout du controelur image -->
     <li><a href="<?php echo base_url('image/add'); ?>">Ajouter une nouvelle image</a></li>
 </ul>
 
-<ul>
+<ul><!-- Possibilité de trier les images, on passe en paramètre à l'url l'argement sort by soit en "id" soit en "path" soit en "comment" -->
     <li class="sort"><a href="<?php echo current_url(); ?>?sortby=id">Trier par ID</a></li><br/>
     <li class="sort"><a href="<?php echo current_url(); ?>?sortby=path">Trier par path</a></li><br/>
     <li class="sort"><a href="<?php echo current_url(); ?>?sortby=comment">Trier par commentaire</a></li>
 </ul>
 
+<!-- Si la pagination à lieu d'être, on affiche la page courante sur le nombre de page total -->
 <?php if (isset($pagination)): ?>
 <p>Page <?php echo $pagination->cur_page; ?> / <?php echo $total_pages; ?></p>
 <?php endif; ?>
 
-<ul>
-	<?php $i = 0; ?>
-    <?php foreach ($results as $image): ?>
-    <li>
+<ul> <!-- Manière d'afficher nos image -->
+	<?php $i = 0; ?> <!-- initialisation d'un compteur d'image -->
+    <?php foreach ($results as $image): ?> <!-- pour toutes les images -->
+    <li> <!-- on affiche l'image en cours -->
         <?php $this->load->view('images/item.phtml', array('image' => $image)); ?>
 		 
     </li>
-	 <?php if (++$i % 5 == 0): ?>
-	 </ul>
+	 <?php if (++$i % 5 == 0): ?> <!-- Tant qu'on a pas x images, on écrit sur la même ligne -->
+	 </ul><!-- Si les 5 images sont atteinte, on ferme la ligne et on en réouvre une nouvelle -->
 	 <ul>
 	 <?php endif; ?>
-    <?php endforeach; ?>
+    <?php endforeach; ?> <!-- fin de la boucle -->
 </ul>
 
 <p>
-<?php if (isset($links)): ?>
-    <?php echo $links; ?>
-    - <a href="<?php echo base_url('image/index/all'); ?>">Tout afficher</a>
-<?php else: ?>
-    <a href="<?php echo base_url('image/index'); ?>">Afficher par page</a>
+<?php if (isset($links)): ?> <!-- si la pagination est en place-->
+    <?php echo $links; ?> <!-- On affiche les lien des pages (1,2,3,n last) -->
+    - <a href="<?php echo base_url('image/index/all'); ?>">Tout afficher</a> <!-- et la possibilité de voir toutes les images d'un coup-->
+<?php else: ?><!-- Sinon, dans le cas où nous affichons les images toutes ensemble, nous donnons la possibilité de revenir a la pagination -->
+    <a href="<?php echo base_url('image/index'); ?>">Afficher par page</a> 
 <?php endif; ?>
+</p><!-- Méthode simple pour lancer le programme java du TP4, voir la sortie test.txt créée -->
+	<a href="<?php echo base_url('image/communiq'); ?>">Test java</a>
+<p>
+	
 </p>
-
